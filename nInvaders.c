@@ -29,7 +29,6 @@
 #include "player.h"
 #include "aliens.h"
 #include "ufo.h"
-#include "highscore.h"
 
 #define FPS 50
 
@@ -158,8 +157,6 @@ void readInput()
 			status = GAME_NEXTLEVEL;
 		} else if (ch == 'q') {	// quit game
 			status = GAME_EXIT;
-		} else if (ch == 'a') { //DEBUG: add highscore entry
-			addEntry("CHEATER!", 6666, 1);
 		}
 		break;
 
@@ -341,10 +338,7 @@ int main(int argc, char **argv)
 	graphicEngineInit();			// initialize graphic engine
 	
 	// set up timer/ game handling
-	setUpTimer();
-
-	// load highscore and set start status
-	highscore = readHighScore();
+	setUpTimer();		
 	status = GAME_HIGHSCORE;
 
 	// read keyboard input
@@ -352,9 +346,6 @@ int main(int argc, char **argv)
 		// do movements and key-checking
 		readInput();
 	} while (0 == 0);
-
-	// save highscore
-	writeHighScore(highscore);
 	
 	return 0;
 }
